@@ -1,0 +1,18 @@
+.ItemCard {
+  padding: 20px;
+  border-radius: 4px;
+  background: lightgreen;
+  width: 200px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.is-not-packed {
+  background-color: red;
+}
+
+.description {
+  font-size: 18px;
+}

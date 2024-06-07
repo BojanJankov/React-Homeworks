@@ -1,0 +1,34 @@
+.ItemPage {
+  height: 600px;
+  display: grid;
+}
+
+.ItemPage h1 {
+  margin: 0;
+  padding: 20px;
+  font-size: 32px;
+}
+
+.items-container {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.items-details {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: cornflowerblue;
+  color: black;
+  width: 500px;
+  height: 50px;
+}
