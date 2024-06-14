@@ -1,0 +1,13 @@
+.ItemPage {
+  min-height: max-content;
+}
+
+.item-lists-container {
+  display: grid;
+  grid-template-rows: max-content 200px;
+}
+
+.results-container {
+  display: grid;
+  place-items: center;
+}
