@@ -4,9 +4,32 @@ import "./ItemList.css";
 
 interface ItemListProps {
   data: ItemModel[];
+  isPackedItem: (selectedItem: ItemModel) => void;
+  removeIsPackedItem: (selectedItem: ItemModel) => void;
+  addQuntityItem: (selectedItem: ItemModel) => void;
+  removeQuntityItem: (selectedItem: ItemModel) => void;
 }
 
-function ItemList({ data }: ItemListProps) {
+function ItemList({
+  data,
+  isPackedItem,
+  removeIsPackedItem,
+  addQuntityItem,
+  removeQuntityItem,
+}: ItemListProps) {
+  const totalPackedItems = () => {
+    return data.filter((item) => item.isPacked).length;
+  };
+  const totalUnpackedItems = () => {
+    return data.filter((item) => !item.isPacked).length;
+  };
+  let sum = 0;
+  const totalQuntity = (sum: number) => {
+    data.map((item) => {
+      sum += item.quantity;
+    });
+    return sum;
+  };
   return (
     <>
       <div className="items-container">
@@ -16,7 +39,14 @@ function ItemList({ data }: ItemListProps) {
             {data.map(
               (item) =>
                 item.category === "toiletries" && (
-                  <Item key={item.id} item={item} />
+                  <Item
+                    key={item.id}
+                    item={item}
+                    isPackedItem={isPackedItem}
+                    removeIsPackedItem={removeIsPackedItem}
+                    addQuntityItem={addQuntityItem}
+                    removeQuntityItem={removeQuntityItem}
+                  />
                 )
             )}
           </div>
@@ -27,7 +57,14 @@ function ItemList({ data }: ItemListProps) {
             {data.map(
               (item) =>
                 item.category === "essentials" && (
-                  <Item key={item.id} item={item} />
+                  <Item
+                    key={item.id}
+                    item={item}
+                    isPackedItem={isPackedItem}
+                    removeIsPackedItem={removeIsPackedItem}
+                    addQuntityItem={addQuntityItem}
+                    removeQuntityItem={removeQuntityItem}
+                  />
                 )
             )}
           </div>
@@ -41,15 +78,15 @@ function ItemList({ data }: ItemListProps) {
           </div>
           <div className="results">
             <h2>Total quntity:</h2>
-            <p>{}</p>
+            <p>{totalQuntity(sum)}</p>
           </div>
           <div className="results">
             <h2>Total packed:</h2>
-            <p>{data.length}</p>
+            <p>{totalPackedItems()}</p>
           </div>
           <div className="results">
             <h2>Total unpacked:</h2>
-            <p>{data.length}</p>
+            <p>{totalUnpackedItems()}</p>
           </div>
         </div>
       </div>

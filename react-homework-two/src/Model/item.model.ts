@@ -1,5 +1,5 @@
 export interface ItemModel {
-  id: number;
+  id: string;
   description: string;
   quantity: number;
   isPacked: boolean;
