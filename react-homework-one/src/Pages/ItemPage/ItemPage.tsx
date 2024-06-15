@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ItemCard from "../../Components/ItemCard/ItemCard";
 import { Item } from "../../interfeces/item.model";
 import "./ItemPage.css";
@@ -24,26 +25,59 @@ function ItemPage() {
     },
   ];
 
+  const [items, setItems] = useState<Item[]>(itemsData);
+
+  const setPackedItems = (selectedItem: Item) => {
+    setItems((prev) => {
+      return prev.map((item) => {
+        if (item.id === selectedItem.id) {
+          item.isPacked = true;
+          return item;
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const removePackedItems = (selectedItem: Item) => {
+    setItems((prev) => {
+      return prev.map((item) => {
+        if (item.id === selectedItem.id) {
+          item.isPacked = false;
+          return item;
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
   return (
     <section className="ItemPage">
       <div>
         <h1>Items:</h1>
         <div className="items-container">
-          {itemsData.map((item, i) => (
-            <ItemCard key={i} item={item} />
+          {items.map((item, i) => (
+            <ItemCard
+              key={i}
+              item={item}
+              setPackedItems={setPackedItems}
+              removePackedItems={removePackedItems}
+            />
           ))}
         </div>
       </div>
       <div className="details-container">
         <div className="items-details">
-          <div>Total: {itemsData.length}</div>
+          <div>Total: {items.length}</div>
           <div>
             Packed items:{" "}
-            {itemsData.filter((item) => item.isPacked === true).length}
+            {items.filter((item) => item.isPacked === true).length}
           </div>
           <div>
             Unpacked items:{" "}
-            {itemsData.filter((item) => item.isPacked === false).length}
+            {items.filter((item) => item.isPacked === false).length}
           </div>
         </div>
       </div>
