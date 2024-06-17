@@ -16,10 +16,7 @@ function ItemPage() {
       setMaleData((prev) => {
         return prev.map((item) => {
           if (item.id === selectedItem.id) {
-            console.log("pre", item.quantity);
-            item.quantity++;
-            console.log("after", item.quantity);
-            return item;
+            return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
           }
@@ -30,8 +27,7 @@ function ItemPage() {
       setFemaleData((prev) => {
         return prev.map((item) => {
           if (item.id === selectedItem.id) {
-            item.quantity++;
-            return item;
+            return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
           }
@@ -45,8 +41,7 @@ function ItemPage() {
       setMaleData((prev) => {
         return prev.map((item) => {
           if (item.id === selectedItem.id && item.quantity !== 0) {
-            item.quantity--;
-            return item;
+            return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
           }
@@ -57,8 +52,7 @@ function ItemPage() {
       setFemaleData((prev) => {
         return prev.map((item) => {
           if (item.id === selectedItem.id && item.quantity !== 0) {
-            item.quantity--;
-            return item;
+            return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
           }
