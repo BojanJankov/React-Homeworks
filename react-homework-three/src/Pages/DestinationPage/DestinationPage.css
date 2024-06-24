@@ -1,0 +1,21 @@
+.DestinationPage {
+  min-height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countries-div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px;
+}
