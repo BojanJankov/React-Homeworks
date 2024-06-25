@@ -8,6 +8,7 @@ import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import ItemPage from "./Pages/ItemPage/ItemPage";
 import DestinationPage from "./Pages/DestinationPage/DestinationPage";
 import TripDetailsPage from "./Pages/TripDetailsPage/TripDetailsPage";
+import SummaryPage from "./Pages/SummaryPage/SummaryPage";
 
 function App() {
   const navLinkData: NavLinkModel[] = [
@@ -34,6 +35,7 @@ function App() {
           <Route path="/item-page/:gender" element={<ItemPage />} />
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/trip-details" element={<TripDetailsPage />} />
+          <Route path="/summary" element={<SummaryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

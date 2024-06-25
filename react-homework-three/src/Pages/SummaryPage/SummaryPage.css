@@ -1,0 +1,51 @@
+.SummaryPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.summery-heading {
+  width: 100%;
+  height: 50px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.summery-heading h1 {
+  font-size: 32px;
+}
+
+.summery-info-div {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 50px;
+}
+
+.summery-items-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.summery-destination-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.summery-trip-details-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items-div-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.summery-item-div {
+  width: 250px;
+  background-color: violet;
+  height: 80px;
+}

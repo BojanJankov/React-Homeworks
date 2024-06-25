@@ -32,6 +32,7 @@ function ItemPage() {
       return prev.map((item) => {
         if (item.id === selectedItem.id) {
           item.isPacked = true;
+          console.log(item.isPacked);
           return item;
         } else {
           return item;

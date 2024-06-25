@@ -3,6 +3,7 @@ import { ItemModel } from "../Model/item.model";
 import itemsJSON from "../data/items.json";
 import axios from "axios";
 import { CountryDetailsType } from "../Model/country.model";
+import { FormValues } from "../Pages/TripDetailsPage/TripDetailsPage";
 
 interface ItemContextType {
   items: ItemModel[];
@@ -16,6 +17,7 @@ interface ItemContextType {
   resetItems: () => void;
   sortItems: (query: string) => void;
   addNewItem: (title: string, category: string, gender: string) => void;
+  onSubmit: (data: FormValues) => void;
 }
 
 export const ItemContext = createContext<ItemContextType>({
@@ -30,14 +32,18 @@ export const ItemContext = createContext<ItemContextType>({
   resetItems() {},
   sortItems() {},
   addNewItem() {},
+  onSubmit() {},
 });
 
 function ItemProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ItemModel[]>([]);
   const [countries, setCountires] = useState<CountryDetailsType[]>([]);
-  const [destination, setDestination] = useState({});
+  const [destination, setDestination] = useState<CountryDetailsType>();
+  const [tripDetails, setTripDetails] = useState<FormValues>();
 
-  console.log("destination from context", destination);
+  console.log("tripDetails from context", tripDetails);
+
+  // Items page functions
 
   useEffect(() => {
     setItems(itemsJSON);
@@ -128,6 +134,8 @@ function ItemProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  // Countries fetch and functions
+
   const getCountriesFetch = async () => {
     try {
       const response = await axios.get("https://restcountries.com/v3.1/all");
@@ -147,6 +155,12 @@ function ItemProvider({ children }: { children: ReactNode }) {
     setDestination(selectedCountry);
   };
 
+  // Trip details functions
+
+  const onSubmit = (data: FormValues) => {
+    setTripDetails(data);
+  };
+
   return (
     <>
       <ItemContext.Provider
@@ -162,6 +176,7 @@ function ItemProvider({ children }: { children: ReactNode }) {
           removeQuntityItem,
           isPackedItem,
           removeIsPackedItem,
+          onSubmit,
         }}
       >
         {children}

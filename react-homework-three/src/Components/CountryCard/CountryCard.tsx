@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CountryDetailsType } from "../../Model/country.model";
 import "./CountryCard.css";
 import { ItemContext } from "../../Context/ItemContext";
@@ -8,12 +8,20 @@ interface CountryCardProps {
 }
 
 function CountryCard({ country }: CountryCardProps) {
+  const [bgColorClick, setBgColorClick] = useState("lightblue");
   const { onClickDestination } = useContext(ItemContext);
+
   return (
     <div
       className="CountryCard"
+      style={{ backgroundColor: bgColorClick }}
       onClick={() => {
         onClickDestination(country);
+        if (bgColorClick !== "lightgreen") {
+          setBgColorClick("lightgreen");
+        } else {
+          setBgColorClick("lightblue");
+        }
       }}
     >
       <div className="country-image">

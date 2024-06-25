@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Item from "../Item/Item";
 import "./ItemList.css";
 import { ItemContext } from "../../Context/ItemContext";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 function ItemList() {
   const { items, resetItems, sortItems, addNewItem } = useContext(ItemContext);
@@ -105,6 +105,11 @@ function ItemList() {
               )}
           </div>
         </div>
+      </div>
+      <div className="next-destination-btn">
+        <NavLink to="/destination">
+          <button>Let's look for your destination!</button>
+        </NavLink>
       </div>
       <div className="results-container">
         <div className="total-results">
