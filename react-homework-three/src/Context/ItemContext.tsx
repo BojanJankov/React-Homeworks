@@ -8,7 +8,7 @@ import { FormValues } from "../Pages/TripDetailsPage/TripDetailsPage";
 interface ItemContextType {
   items: ItemModel[];
   countries: CountryDetailsType[];
-  destination: {};
+  destination: CountryDetailsType | null;
   onClickDestination: (selectedCountry: CountryDetailsType) => void;
   addQuntityItem: (selectedItem: ItemModel) => void;
   removeQuntityItem: (selectedItem: ItemModel) => void;
@@ -23,7 +23,7 @@ interface ItemContextType {
 export const ItemContext = createContext<ItemContextType>({
   items: [],
   countries: [],
-  destination: {},
+  destination: null,
   onClickDestination() {},
   addQuntityItem() {},
   removeQuntityItem() {},
@@ -38,10 +38,13 @@ export const ItemContext = createContext<ItemContextType>({
 function ItemProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ItemModel[]>([]);
   const [countries, setCountires] = useState<CountryDetailsType[]>([]);
-  const [destination, setDestination] = useState<CountryDetailsType>();
+  const [destination, setDestination] = useState<CountryDetailsType | null>(
+    null
+  );
   const [tripDetails, setTripDetails] = useState<FormValues>();
 
   console.log("tripDetails from context", tripDetails);
+  console.log("destination", destination);
 
   // Items page functions
 

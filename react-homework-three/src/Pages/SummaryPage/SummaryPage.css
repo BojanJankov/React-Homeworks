@@ -45,7 +45,17 @@
 }
 
 .summery-item-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 250px;
-  background-color: violet;
+  background-color: blueviolet;
   height: 80px;
+  padding: 10px;
+}
+
+.destination-card {
+  background-color: blueviolet;
+  padding: 30px;
 }
