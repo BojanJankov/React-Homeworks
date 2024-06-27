@@ -59,3 +59,12 @@
   background-color: blueviolet;
   padding: 30px;
 }
+
+.trip-details-info-div {
+  background-color: blueviolet;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}

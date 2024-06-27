@@ -1,5 +1,5 @@
 .TripDetailsPage {
-  min-height: 800px;
+  min-height: 600px;
   display: grid;
   place-content: center;
 }

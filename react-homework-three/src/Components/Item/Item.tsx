@@ -40,10 +40,10 @@ function Item({ item }: ItemProps) {
         <button
           className="packed-btn"
           onClick={() => {
-            if (item.isPacked) {
-              removeIsPackedItem(item);
-            } else {
+            if (!item.isPacked && item.quantity >= 1) {
               isPackedItem(item);
+            } else {
+              removeIsPackedItem(item);
             }
           }}
         >

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Item from "../Item/Item";
 import "./ItemList.css";
 import { ItemContext } from "../../Context/ItemContext";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ItemList() {
   const { items, resetItems, sortItems, addNewItem } = useContext(ItemContext);
@@ -26,6 +26,8 @@ function ItemList() {
     });
     return sum;
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -106,11 +108,17 @@ function ItemList() {
           </div>
         </div>
       </div>
-      <div className="next-destination-btn">
-        <NavLink to="/destination">
-          <button>Let's look for your destination!</button>
-        </NavLink>
-      </div>
+      {totalPackedItems() > 0 ? (
+        <div className="next-destination-btn">
+          <button
+            onClick={() => {
+              navigate("/destination");
+            }}
+          >
+            Let's look for your destination!
+          </button>
+        </div>
+      ) : null}
       <div className="results-container">
         <div className="total-results">
           <div className="results">

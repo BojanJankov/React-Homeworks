@@ -4,11 +4,14 @@ import SearchInput from "../../Components/SearchInput/SearchInput";
 import "./DestinationPage.css";
 import { ItemContext } from "../../Context/ItemContext";
 import { CountryDetailsType } from "../../Model/country.model";
+import { useNavigate } from "react-router-dom";
 
 function DestinationPage() {
-  const { countries } = useContext(ItemContext);
+  const { countries, destination } = useContext(ItemContext);
   const [filteredCountries, setFilteredCountries] =
     useState<CountryDetailsType[]>(countries);
+
+  const navigate = useNavigate();
 
   const handleSearch = useCallback(
     (value: string) => {
@@ -30,6 +33,22 @@ function DestinationPage() {
       <div className="search-div">
         <SearchInput handleSearch={handleSearch} />
       </div>
+      {destination !== null ? (
+        <div className="button-div-navigation">
+          <h3>
+            After you chose your destination (green), let's finsh with your trip
+            details
+          </h3>
+          <button
+            className="navigate-button"
+            onClick={() => {
+              navigate("/trip-details");
+            }}
+          >
+            Trip details
+          </button>
+        </div>
+      ) : null}
       <div className="countries-div">
         {filteredCountries.length > 0 ? (
           filteredCountries.map((country, i) => (

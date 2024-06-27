@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import "./TripDetailsPage.css";
 import { useContext } from "react";
 import { ItemContext } from "../../Context/ItemContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface FormValues {
   firstName: string;
@@ -13,6 +13,7 @@ export interface FormValues {
 }
 
 function TripDetailsPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -79,11 +80,17 @@ function TripDetailsPage() {
           </button>
         </div>
       </form>
-      <div className="display-trip-btn">
-        <NavLink to="/summary">
-          <button>Display Trip Data</button>
-        </NavLink>
-      </div>
+      {isValid && isSubmitted && (
+        <div className="display-trip-btn">
+          <button
+            onClick={() => {
+              navigate("/summary");
+            }}
+          >
+            Display Trip Data
+          </button>
+        </div>
+      )}
     </section>
   );
 }

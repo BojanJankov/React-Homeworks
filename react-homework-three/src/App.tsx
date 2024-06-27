@@ -16,14 +16,6 @@ function App() {
       path: "/",
       text: "Home",
     },
-    {
-      path: "/destination",
-      text: "Destination",
-    },
-    {
-      path: "/trip-details",
-      text: "Trip details",
-    },
   ];
 
   return (

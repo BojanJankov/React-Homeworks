@@ -8,6 +8,7 @@ import { FormValues } from "../Pages/TripDetailsPage/TripDetailsPage";
 interface ItemContextType {
   items: ItemModel[];
   countries: CountryDetailsType[];
+  tripDetails: FormValues | null;
   destination: CountryDetailsType | null;
   onClickDestination: (selectedCountry: CountryDetailsType) => void;
   addQuntityItem: (selectedItem: ItemModel) => void;
@@ -33,6 +34,7 @@ export const ItemContext = createContext<ItemContextType>({
   sortItems() {},
   addNewItem() {},
   onSubmit() {},
+  tripDetails: null,
 });
 
 function ItemProvider({ children }: { children: ReactNode }) {
@@ -41,7 +43,7 @@ function ItemProvider({ children }: { children: ReactNode }) {
   const [destination, setDestination] = useState<CountryDetailsType | null>(
     null
   );
-  const [tripDetails, setTripDetails] = useState<FormValues>();
+  const [tripDetails, setTripDetails] = useState<FormValues | null>(null);
 
   console.log("tripDetails from context", tripDetails);
   console.log("destination", destination);
@@ -169,6 +171,7 @@ function ItemProvider({ children }: { children: ReactNode }) {
       <ItemContext.Provider
         value={{
           items,
+          tripDetails,
           countries,
           destination,
           onClickDestination,
