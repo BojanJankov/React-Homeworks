@@ -4,6 +4,7 @@ import itemsJSON from "../data/items.json";
 import axios from "axios";
 import { CountryDetailsType } from "../Model/country.model";
 import { FormValues } from "../Pages/TripDetailsPage/TripDetailsPage";
+import { v4 as uuid } from "uuid";
 
 interface ItemContextType {
   items: ItemModel[];
@@ -31,7 +32,9 @@ export const ItemContext = createContext<ItemContextType>({
   isPackedItem() {},
   removeIsPackedItem() {},
   resetItems() {},
-  sortItems() {},
+  sortItems() {
+    return [];
+  },
   addNewItem() {},
   onSubmit() {},
   tripDetails: null,
@@ -55,22 +58,36 @@ function ItemProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const sortItems = (query: string) => {
+    if (query === "title") {
+      setItems((prev) => {
+        const copyPrev: ItemModel[] = [...prev];
+        copyPrev.sort((a, b) => (b.description > a.description ? 1 : -1));
+        return copyPrev;
+      });
+    }
+
     if (query === "quantity") {
       setItems((prev) => {
-        return prev.sort((a, b) =>
-          Number(a.quantity) - Number(b.quantity) ? 1 : -1
+        const copyPrev: ItemModel[] = [...prev];
+        copyPrev.sort((a, b) =>
+          Number(b.quantity) > Number(a.quantity) ? 1 : -1
         );
+        return copyPrev;
       });
     }
     console.log(items);
     if (query === "isPacked") {
       setItems((prev) => {
-        return prev.filter((item) => item.isPacked);
+        const copyPrev: ItemModel[] = [...prev];
+        copyPrev.sort((a, b) => (b.isPacked > a.isPacked ? 1 : -1));
+        return copyPrev;
       });
     }
     if (query === "isNotPacked") {
       setItems((prev) => {
-        return prev.filter((item) => !item.isPacked);
+        const copyPrev: ItemModel[] = [...prev];
+        copyPrev.sort((a, b) => (!b.isPacked > !a.isPacked ? 1 : -1));
+        return copyPrev;
       });
     }
   };
@@ -80,8 +97,12 @@ function ItemProvider({ children }: { children: ReactNode }) {
   };
 
   const addNewItem = (title: string, category: string, gender: string) => {
+    const foundItem = items.filter((item) => item.description === title);
+
+    if (foundItem) return;
+
     const newItem: ItemModel = {
-      id: itemsJSON[itemsJSON.length - 1].id + 1,
+      id: uuid(),
       description: title,
       isPacked: false,
       quantity: 0,

@@ -6,10 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function ItemList() {
   const { items, resetItems, sortItems, addNewItem } = useContext(ItemContext);
-
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("essentials");
   const { gender } = useParams();
 
   const totalPackedItems = () => {
@@ -52,6 +51,7 @@ function ItemList() {
           className="add-item-btn"
           onClick={() => {
             addNewItem(title, category, String(gender));
+            setTitle("");
           }}
         >
           Add item
