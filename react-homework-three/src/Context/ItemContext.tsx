@@ -54,7 +54,11 @@ function ItemProvider({ children }: { children: ReactNode }) {
   // Items page functions
 
   useEffect(() => {
-    setItems(itemsJSON);
+    setItems((prev) => {
+      return (prev = itemsJSON.map((item) => {
+        return { ...item, quantity: 0, isPacked: false };
+      }));
+    });
   }, []);
 
   const sortItems = (query: string) => {
@@ -93,11 +97,15 @@ function ItemProvider({ children }: { children: ReactNode }) {
   };
 
   const resetItems = () => {
-    setItems(itemsJSON);
+    setItems((prev) => {
+      return prev.map((item) => {
+        return { ...item, quantity: 0, isPacked: false };
+      });
+    });
   };
 
   const addNewItem = (title: string, category: string, gender: string) => {
-    const foundItem = items.filter((item) => item.description === title);
+    const foundItem = items.find((item) => item.description === title);
 
     if (foundItem) return;
 

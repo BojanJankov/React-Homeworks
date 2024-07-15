@@ -12,7 +12,8 @@ function ItemList() {
   const { gender } = useParams();
 
   const totalPackedItems = () => {
-    return items.filter((item) => item.isPacked).length;
+    return items.filter((item) => item.gender === gender && item.isPacked)
+      .length;
   };
   const totalUnpackedItems = () => {
     return items.filter((item) => item.gender === gender && !item.isPacked)
@@ -21,7 +22,9 @@ function ItemList() {
   let sum = 0;
   const totalQuntity = (sum: number) => {
     items.map((item) => {
-      sum += item.quantity;
+      if (item.gender === gender) {
+        sum += item.quantity;
+      }
     });
     return sum;
   };
