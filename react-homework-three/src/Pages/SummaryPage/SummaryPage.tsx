@@ -19,8 +19,8 @@ function SummaryPage() {
               .filter((item) => item.isPacked)
               .map((item, i) => (
                 <div className="summery-item-div" key={i}>
-                  <h4>{item.description}</h4>
-                  <strong>Quntity:{item.quantity}</strong>
+                  <strong>Item: {item.description}</strong>
+                  <strong>Quntity: {item.quantity}</strong>
                 </div>
               ))}
           </div>

@@ -1,21 +1,23 @@
 .ItemPage {
-  min-height: max-content;
+  min-height: 786px;
 }
 
 .item-lists-container {
   display: grid;
-  grid-template-rows: max-content 200px;
+  grid-template-rows: max-content max-content max-content max-content 140px;
 }
 
 .results-container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: end;
 }
 
 .add-item-div {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+
+  padding-top: 30px;
   gap: 20px;
 }
 

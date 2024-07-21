@@ -16,7 +16,7 @@ function CountryCard({ country }: CountryCardProps) {
       style={
         country === destination
           ? { backgroundColor: "lightgreen" }
-          : { backgroundColor: "lightblue" }
+          : { backgroundColor: "#6e44ff" }
       }
       onClick={() => {
         dispatch(onClickDestination(country));

@@ -37,6 +37,7 @@ function TripDetailsPage() {
           dispatch(onSubmit(data));
         })}
       >
+        <h2>Enter your details here:</h2>
         <input
           type="text"
           placeholder="First Name"
@@ -72,10 +73,10 @@ function TripDetailsPage() {
             required: { value: true, message: "Phone number is required!" },
           })}
         />
-        <div>
+        <div className="error-add-button-div">
           <div>
             {!isValid && isSubmitted ? (
-              <div>Are fields are required</div>
+              <div style={{ color: "red" }}>Are fields are required</div>
             ) : null}
           </div>
           <button className="add-button" type="submit">
