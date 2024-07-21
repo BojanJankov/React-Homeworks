@@ -1,13 +1,16 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CountryCard from "../../Components/CountryCard/CountryCard";
 import SearchInput from "../../Components/SearchInput/SearchInput";
 import "./DestinationPage.css";
-import { ItemContext } from "../../Context/ItemContext";
 import { CountryDetailsType } from "../../Model/country.model";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../utils/hooks";
 
 function DestinationPage() {
-  const { countries, destination } = useContext(ItemContext);
+  const countries = useAppSelector((state) => state.countries.value);
+  console.log(countries);
+  const destination = useAppSelector((state) => state.countries.destination);
+
   const [filteredCountries, setFilteredCountries] =
     useState<CountryDetailsType[]>(countries);
 

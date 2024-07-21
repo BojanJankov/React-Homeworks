@@ -1,15 +1,15 @@
-import { useContext } from "react";
 import { CountryDetailsType } from "../../Model/country.model";
 import "./CountryCard.css";
-import { ItemContext } from "../../Context/ItemContext";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { onClickDestination } from "../../state/slices/countries.slice";
 
 interface CountryCardProps {
   country: CountryDetailsType;
 }
 
 function CountryCard({ country }: CountryCardProps) {
-  const { onClickDestination, destination } = useContext(ItemContext);
-
+  const destination = useAppSelector((state) => state.countries.destination);
+  const dispatch = useAppDispatch();
   return (
     <div
       className="CountryCard"
@@ -19,7 +19,7 @@ function CountryCard({ country }: CountryCardProps) {
           : { backgroundColor: "lightblue" }
       }
       onClick={() => {
-        onClickDestination(country);
+        dispatch(onClickDestination(country));
       }}
     >
       <div className="country-image">

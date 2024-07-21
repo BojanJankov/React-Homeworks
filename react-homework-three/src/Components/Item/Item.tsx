@@ -1,19 +1,20 @@
-import { useContext } from "react";
 import { ItemModel } from "../../Model/item.model";
 import "./Item.css";
-import { ItemContext } from "../../Context/ItemContext";
+import { useAppDispatch } from "../../utils/hooks";
+import {
+  addQuntityItem,
+  isPackedItem,
+  removeIsPackedItem,
+  removeQuntityItem,
+} from "../../state/slices/items.slice";
 
 interface ItemProps {
   item: ItemModel;
 }
 
 function Item({ item }: ItemProps) {
-  const {
-    isPackedItem,
-    addQuntityItem,
-    removeIsPackedItem,
-    removeQuntityItem,
-  } = useContext(ItemContext);
+  const dispatch = useAppDispatch();
+
   return (
     <div className="Item">
       <h4 className="item-title">{item.description}</h4>
@@ -21,7 +22,7 @@ function Item({ item }: ItemProps) {
         <span>Quantity:</span>
         <button
           onClick={() => {
-            removeQuntityItem(item);
+            dispatch(removeQuntityItem(item));
           }}
         >
           -
@@ -29,7 +30,7 @@ function Item({ item }: ItemProps) {
         <strong>{item.quantity}</strong>
         <button
           onClick={() => {
-            addQuntityItem(item);
+            dispatch(addQuntityItem(item));
           }}
         >
           +
@@ -41,9 +42,9 @@ function Item({ item }: ItemProps) {
           className="packed-btn"
           onClick={() => {
             if (!item.isPacked && item.quantity >= 1) {
-              isPackedItem(item);
+              dispatch(isPackedItem(item));
             } else {
-              removeIsPackedItem(item);
+              dispatch(removeIsPackedItem(item));
             }
           }}
         >

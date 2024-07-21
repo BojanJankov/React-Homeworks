@@ -9,8 +9,17 @@ import ItemPage from "./Pages/ItemPage/ItemPage";
 import DestinationPage from "./Pages/DestinationPage/DestinationPage";
 import TripDetailsPage from "./Pages/TripDetailsPage/TripDetailsPage";
 import SummaryPage from "./Pages/SummaryPage/SummaryPage";
+import { useEffect } from "react";
+import { fetchCountries } from "./state/slices/countries.slice";
+import { useAppDispatch } from "./utils/hooks";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCountries());
+  }, [dispatch]);
+
   const navLinkData: NavLinkModel[] = [
     {
       path: "/",

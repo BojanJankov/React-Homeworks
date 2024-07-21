@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import "./TripDetailsPage.css";
-import { useContext } from "react";
-import { ItemContext } from "../../Context/ItemContext";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../utils/hooks";
+import { onSubmit } from "../../state/slices/tripDetails.slice";
 
 export interface FormValues {
   firstName: string;
@@ -13,6 +13,7 @@ export interface FormValues {
 }
 
 function TripDetailsPage() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -27,12 +28,14 @@ function TripDetailsPage() {
       phoneNumber: "",
     },
   });
-  const { onSubmit } = useContext(ItemContext);
+
   return (
     <section className="TripDetailsPage">
       <form
         className="trip-details-form"
-        onSubmit={handleSubmit((data) => onSubmit(data))}
+        onSubmit={handleSubmit((data) => {
+          dispatch(onSubmit(data));
+        })}
       >
         <input
           type="text"

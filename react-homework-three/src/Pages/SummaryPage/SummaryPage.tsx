@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import "./SummaryPage.css";
-import { ItemContext } from "../../Context/ItemContext";
+import { useAppSelector } from "../../utils/hooks";
 
 function SummaryPage() {
-  const { items, destination, tripDetails } = useContext(ItemContext);
-  console.log(destination);
+  const items = useAppSelector((state) => state.items.value);
+  const destination = useAppSelector((state) => state.countries.destination);
+  const tripDetails = useAppSelector((state) => state.tripDetails.value);
 
   return (
     <section className="SummaryPage">
@@ -17,8 +17,8 @@ function SummaryPage() {
           <div className="items-div-container">
             {items
               .filter((item) => item.isPacked)
-              .map((item) => (
-                <div className="summery-item-div">
+              .map((item, i) => (
+                <div className="summery-item-div" key={i}>
                   <h4>{item.description}</h4>
                   <strong>Quntity:{item.quantity}</strong>
                 </div>

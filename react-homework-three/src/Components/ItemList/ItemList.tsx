@@ -1,11 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Item from "../Item/Item";
 import "./ItemList.css";
-import { ItemContext } from "../../Context/ItemContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { ItemModel } from "../../Model/item.model";
+import {
+  addNewItem,
+  resetItems,
+  sortItems,
+} from "../../state/slices/items.slice";
 
 function ItemList() {
-  const { items, resetItems, sortItems, addNewItem } = useContext(ItemContext);
+  const items: ItemModel[] = useAppSelector((state) => state.items.value);
+  const dispatch = useAppDispatch();
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("essentials");
@@ -53,7 +60,8 @@ function ItemList() {
         <button
           className="add-item-btn"
           onClick={() => {
-            addNewItem(title, category, String(gender));
+            dispatch(addNewItem({ title, category, gender }));
+
             setTitle("");
           }}
         >
@@ -74,12 +82,17 @@ function ItemList() {
         </select>
         <button
           onClick={() => {
-            sortItems(query);
+            dispatch(sortItems(query));
           }}
         >
           Sort
         </button>
-        <button type="button" onClick={resetItems}>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(resetItems());
+          }}
+        >
           Reset items
         </button>
       </div>
